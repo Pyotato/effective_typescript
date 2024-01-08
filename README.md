@@ -64,7 +64,7 @@ function cacheLast<T extends Function>(fn: T):T{
 ```ts
 declare function shallowObjectEqual<T extends object>(a:any,b:any):boolean;
 ```
-객체 매개변수 a와 b가 동일한 키를 가진다는 보장이 없기 때문에 구현할 때는 주의해야합니다. ([아이템 54](#))
+객체 매개변수 a와 b가 동일한 키를 가진다는 보장이 없기 때문에 구현할 때는 주의해야합니다. ([아이템 54](https://github.com/Pyotato/effective_typescript/tree/item54))
 
 ```ts
 declare function shallowEqual(a: any, b: any):boolean;
