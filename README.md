@@ -38,52 +38,7 @@ function cacheLast<T extends Function>(fn: T): T {
   return function (...args: any[]) {
     if (!lastArgs || !shallowEqual(lastArgs, args)) {
       lastResult = fn(...args);
-      lastArgs = args;
-    }
-    return lastResult;
-  } as unknown as T;
-}
-```
-
-실제로 함수를 실행해 보면 잘 동작합니다.
-함수 내부에는 any가 꽤 많아 보이지만 타입 정의에는 any가 없기 때문에, cacheLast를 호출하는 쪽에서는 any가 사용됐는지 알지 못합니다.
-
-> 📌 앞의 코드에는 사실 두 가지 문제가 있습니다. **함수를 연속으로 호출하는 경우에 this의 값이 동일한지 체크하지 않습니다.**
->
-> 또한 **원본 함수가 객체처럼 속성 값을 가지고 있었다면 래퍼 함수에는 속성값이 없기 떄문에 타입이 달라집니다.**
->
-> 그러나 일부 예외적인 상황을 제외한다면 cacheLast 함수는 괜찮게 구현되었습니다.
->
-> 여기서는 예를 들기 위해 간단한 구현체를 보인것이고, 실제로는 안전한 타입으로 cacheLast를 구현할 수 있습니다.
-
-한편, 앞 예제에 나온 shallowEqual의 두 개의 배열을 매개변수로 받아서 비교하는 함수이며 타입 정의와 구현이 간단합니다.
-그러나 **객체를 매개변수**로 하는 shallowObjectEqual은 타입 정의는 간단하지만 구현이 조금 복잡한니다.
-
-먼저 shallowObjectEqual의 타입 정의를 보겠습니다.
-
-```ts
-declare function shallowObjectEqual<T extends object>(a: any, b: any): boolean;
-```
-
-객체 매개변수 a와 b가 동일한 키를 가진다는 보장이 없기 때문에 구현할 때는 주의해야합니다. ([아이템 54](https://github.com/Pyotato/effective_typescript/tree/item54))
-
-```ts
-declare function shallowEqual(a: any, b: any): boolean;
-function shallowObjectEqual<T extends object>(a: T, b: T): boolean {
-  for (const [k, aVal] of Object.entries(a)) {
-    if (!(k in b) || aVal !== b[k]) {
-      // 오류!
-      return false;
-    }
-  }
-  return Object.keys(a).length === Object.keys(b).length;
-}
-```
-
-![image](https://github.com/Pyotato/effective_typescript/assets/102423086/5066cd9e-7e55-4050-88be-17b8d235c239)
-
-if구문의 k in b 체크로 b객체에 k속성이 있다는 것을 확인했지만 b[k]부분에서 오류가 발생하는 것이 이상합니다. (타입스크립틔 문맥 활용 능력이 부족한 것으로 보입니다.)
-어쨋든 실제 오류가 아니라는 것을 알고 있기 때문에 any로 단언할 수 박ㅆ에 없습니다.
+      lastAr밖에 없습니다.
 
 ```ts
 declare function shallowEqual(a: any, b: any): boolean;
