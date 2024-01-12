@@ -1,204 +1,158 @@
-#   👥 ITEM 1 : 타입스크립트와 자바스크립트의 관계 이해하기
+# 🔖 ITEM 37 : 공식 명칭에는 상표를 붙이기
 
-타입스크립트를 사용 중인 분들이라면, '타입스크립트는 자바스크립트의 상위집합 (superset)이다' 또는 '타입스크립트는 타입ㄷ이 정의도니 자바스크립트의 상위집합이다'러는 말을 한 번쯤은 들어 봤을 것입니다.
-
-> superset은 수학용어에서 상위집합, 초집합으로 불립니다.
->
-> 자주 사용되지 않는 단어이므로 뜻이 와닿지 않을 수도 있습니다. 자바스크립트는 타입스크립트의 부분 집합(subset)이다'라는 뜻으로 이해하면 됩니다.
-
-이 문장들이 정확히 무슨 의미인지, 그리고 타입스크립트와 자바스크립트는 어떤 관계인지 자세히 알아볼 것입니다.
-타입스크립트는 자바스크립트와 굉장히 밀접한 관계에 있기 때문에, 서로 어떻게 연관되어 있는지 제대로 이해하는 것이 중요합니다.
-
-타입스크립트는 문법적으로도 자바스크립트의 상위집합입니다. 
-자바스크립트 프로그램에 문법 오류가 없다면, 유효한 타입스크립트 프로그램이라고 말할 수 있습니다. 
-그런데 자바스크립트 프로그램에 어떤 이슈가 존재한다면 문법오류가 아니더라도 타입 체커에게 지적당할 가능성이 높습니다.
-그러나 문법의 유효성과 동작의 이슈는 독립적인 문제입니다. 타입스크립트는 여전히 작성된 코드를 파싱하고 자바스크립트로 변환할 수 있습니다. 
-(이것은 두 언어 관계에 대한 또 다른 중요한 점이며 [아이템 3](https://github.com/Pyotato/effective_typescript/blob/item3/README.md)에서 자세히 다룹니다.)
-
-자바스크립트 파일이 _.js_(또는 _.jsx_) 확장자를 사용하는 반면, 타입스크립트 파일은 _.ts_ (또는 _.tsx_) 확장자를 사용합니다. 
-그렇다고 자바스크립트와 타입스크립트가 완전히 다른 언어라는 의미는 아닙니다.
-타입스크립트는 자바스크립트의 상위집합이기 때문에 _.js_ 파일에 있는 코드는 이미 타입스크립트라고 할 수 있습니다. 
-_main.js_ 파일명을 _main.ts_로 바꾼다고 해도 달라지는 것은 없습니다.
-
-이러한 특성은 기존에 존재하는 자바스크립트 코드를 타입스크립트로 마이그레이션하는데 엄청난 이점이 됩니다. 기존 코드를 그대로 유지하면서 일부에만 타입스크립트를 적용 가능하기 때문입니다. 
-이에 비해 자바스크립트로 만든 프로그램을 자바같은 완전히 다른 언어로 바꾸려면 처음부터 다시 작성하는 게 빠를 겁니다.
-마이그레이션은 8장에서 자세히 다룹니다.
-
-모든 자바스크립트 프로그램이 타입스크립트라는 명제는 참이지만, 그 반대는 성립하지 않습니다. 타입스크립트 프로그램이지만 자바스크립트가 아닌 프로그램이 존재합니다. 
-이는 타입스크립트가 타입을 명시하는 추가적인 문법ㅂ을 가지기 때문입니다.
-(과거 논란이 있었던 몇 가지 이유로 인해 추가된 다른 문법들도 존재합니다. 이는 [아이템 53](https://github.com/Pyotato/effective_typescript/blob/item53/README.md)에서 다룹니다.)
-
-예를 들어, 다음 코드는 유효한 타입스크립트 프로그램입니다.
+구조적 타이핑([아이템 4](https://github.com/Pyotato/effective_typescript/blob/item4/README.md))의 특성 때문에 가끔 코드가 이상한 결과를 낼 수 있습니다. 
+다음 코드를 보겠습니다.
 
 ```ts
-function greet(who: string){
-  console.log('Hello',who);
+interface Vector2D{
+  x: number;
+  y: number;
+}
+function calculateNorm(p: Vector2D){
+  return Math.sqrt(p.x * p.x + p.y * p.y);
+}
+
+calculateNorm({x:3,y:4});  // 5
+const vec3D = {x:3, y:4, z:1};
+calculateNorm(vec3D); //5
+```
+
+이 코드는 구조적 타이핑 관점에서는 문제가 없기는 하지만, 수학적으로 따지면 2차원 벡터를 사용해야 이치에 맞습니다.
+
+`calculateNorm` 함수가 3차원 벡터를 허용하지 않게 하려면 공식 명칭 `(nominal typing)`을 사용하면 됩니다.
+공식 명칭을 사용하는 것은. 타입이 아니라 값의 관점에서 Vector2D라고 말하는 것입니다.
+공식 명칭 개념을 타입스크립트에서 흉내내려면 `상표(brand)`를 붙이면 됩니다. (비유를 들자면 스타벅스가 아니나 커피)
+
+> 객체와 클래스의 관계를 생각하면 됩니다. 스타벅스는 현실에 존재하는 구체적 개념이고 커피는 추상적인 개념입니다.
+
+```ts
+interface Vector2D{
+  _brand: '2d';
+  x: number;
+  y: number;
+}
+
+function vec2D(x:number,y:number): Vector2D{
+  return {x,y,_brand:'2d'};
+}
+
+function calculateNorm(p: Vector2D){
+  return Math.sqrt(p.x * p.x + p.y * p.y);
+}
+
+calculateNorm(vec2D(3,4));
+const vec3D = {x:3, y:4, z:1};
+calculateNorm(vec3D);
+```
+
+<img width="1020" alt="image" src="https://github.com/Pyotato/effective_typescript/assets/102423086/eae8ca6a-1fe8-4dd3-ae9e-e6bd3b4c7462">
+
+상표(_brand)를 사용해서 `calculateNorm()`함수가 Vector2D타입만 받는 것을 보장합니다.
+그러나 `vec3D`값에 `_brand: '2d'`라고 추가한 것 같은 악의적인 사용을 막을 수는 없습니다. 다만 단순한 실수를 방지하기에는 충분합니다.
+
+상표 기법은 타입 시스템에서 동작하지만 런타임에 상표를 검사하는 것과 동일한 효과를 얻을 수 있습니다. 
+타입 시스템이기 때문에 런타임 오버헤드를 없앨 수 있고 추가 속성을 붙일 수 없는 string이나 number같은 내장 타입도 상표화할 수 있습니다.
+
+예를 들어, 절대 경로를 사용해 파일 시스템에 접근하는 함수를 가정해 보겠습니다. 런타임에도 경로('/')로 시작하는지 체크하기 쉽지만,
+타입시스템에서는 절대 경로를 판단하기 어렵기 때문에 상표 기법을 사용합니다.
+
+```ts
+type AbsolutePath = string & {brand:'abs'};
+function listAbsolutePath (path: AbsolutePath){
+  // ...
+}
+function isAbsolutePath(path: string): path is AbsolutePath{
+  return path.startsWith('/');
 }
 ```
 
-그러나 자바스크립트를 구동하는 노드(node)같은 프로그램으로 앞의 코드를 실행하면 오류를 출력합니다. 
-
-<img width="642" alt="image" src="https://github.com/Pyotato/effective_typescript/assets/102423086/f21c1671-7f44-479e-8e50-857890352aab">
-
-`: string`은 타입스크립트에서 쓰이는 타입 구문입니다. 타입 구문을 사용하는 순간부터 자바스크립트는 타입스크립트 영역으로 들어가게 됩니다. 
-
-<img width="192" alt="image" src="https://github.com/Pyotato/effective_typescript/assets/102423086/b2830be9-1462-4df5-baaf-da5d82c0858c"/>
-
-타입스크립트 컴파일러는 타입스크립트뿐만 아니라 일반 자바스크립트 프로그램에도 유용합니다. 다음 자바스크립트 프로그램을 예를 들어보겠습니다.
+string 타입이면서 _brand속성을 가지는 객체를 만들 수는 없습니다. AbsolutePath는 온전히 타입 시스템의 영역입니다.
+만약 path값이 절대 경로와 상대 경로 둘 다 될 수 있다면, 타입을 정제해 주는 타입 가드를 사용해서 오류를 방지할 수 있습니다.
 
 ```ts
-let city = 'new york city';
-console.log(city.toUppercase());
-```
+function f(path: string){
+  if(isAbsolutePath(path)){
+    listAbsolutePath(path);
+  } 
+  listAbsolutePath(path);
 
-이 코드를 실행하면 다음과 같은 오류가 발생합니다.
-
-<img width="1012" alt="image" src="https://github.com/Pyotato/effective_typescript/assets/102423086/88a7c8c9-a81b-4094-b1a9-e313c06ec9d1">
-
-앞의 코드에는 타입구문이 없지만, 타입스크립트의 타입 체커는 문제점을 찾아냅니다. city변수가 문자열이라는 것을 알려주지 않아도 타입스크립트는 초기값으로부터 타입을 추론합니다.
-타입 추론은 타입스크립트에서 중요한 부분입니다. 어떻게 사용해야하는지는 3장에서 살펴봅니다.
-
-타입시스템의 목표 중 하나는 런타임에 오류를 발생시킬 코드를 미리 찾아내는 것입니다. 타입스크립트가 '정저'타입 시스템이라는 것은 바로 이런 특징을 말하는 것입니다. 그러나 타입체커가 모든 오류를 찾아내지는 않습니다.
-
-오류가 발생하지는 않지만 의도와 다르게 동작하는 코드도 있습니다. 타입스크립트는 이러한 문제 중 몇 가지를 찾아내기도 합니다. 다음 자바스크립트 프로그램을 보겠습니다.
-
-```ts
-const states = [
-  {name:'Alabama', capital: 'Montgomery'},
-  {name:'Alaska', capital: 'Juneau'},
-  {name:'Arizona', capital: 'Phoenix'},
-];
-
-for (const state of states){
-  console.log(state.capitol);
-}
-
-// 실행 결과
-// undefined
-// undefined
-// undefined
-
-```
-
-앞의 코드는 유효한 자바스크립트(또는 타입스크립트)이며 어떠한 오류도 없이 출력됩니다. 그러나 루프 내의 `state.capitol`은 의도한 코드가 아닌 게 분명합니다.
-이런 경우에 타입스크립트 타입 체커는 추가적인 타입 구문 없이도 오류를 찾아냅니다 (또한 꽤 훌륭한 해결책을 제시합니다).
-
-<img width="986" alt="image" src="https://github.com/Pyotato/effective_typescript/assets/102423086/a50209ea-5dc2-4f79-92a8-e8fb2095845a">
-
-타입스크립트는 타입구문 없이도 오류를 잡을 수 있지만, 타입 구문을 추가한다면 훨씬 더 많은 오류를 찾아낼 수 있습니다. 
-코드의 의도가 무엇인지 타입구문을 통해 타입스크립트에게 알려줄 수 있기 때문에 코드의 동작과 의도가 다른 부분을 찾을 수 있습니다.
-예를 들어, 다음과 같이 capital과 capitol을 맞바꾸어 보겠습니다. 
-
-```ts
-const states = [
-  {name:'Alabama', capitol: 'Montgomery'},
-  {name:'Alaska', capitol: 'Juneau'},
-  {name:'Arizona', capitol: 'Phoenix'},
-];
-
-for (const state of states){
-  console.log(state.capital);
-}
-
-```
-
-<img width="1023" alt="image" src="https://github.com/Pyotato/effective_typescript/assets/102423086/1dfee957-1a08-4971-a828-82706a1a053f">
-
-그런데 타입스크립트가 제시한 해결책은 잘못되었습니다. 
-한곳에서는 capital로, 다른 한곳에서는 capitol로 다르게 타이핑했지만, 타입스크립트는 어느 쪽이 오타인지 판단하지 못합니다. 
-오류의 원인을 추측할 수는 있겠지만 항상 정확하지는 않습니다. 
-따라서 명시적으로 states를 선언하여 의도를 분명하게 하는 것이 좋습니다. 
-
-```ts
-interface State{
-  name: string;
-  capital : string;
-}
-
-const states: State[] = [
-  {name:'Alabama', capitol: 'Montgomery'},
-  {name:'Alaska', capitol: 'Juneau'},
-  {name:'Arizona', capitol: 'Phoenix'},
-];
-
-for(const state of states){
-    console.log(state.capital);
 }
 ```
 
-<img width="1023" alt="image" src="https://github.com/Pyotato/effective_typescript/assets/102423086/f3dc5133-c458-4859-87b5-76d38c678638">
+<img width="1020" alt="image" src="https://github.com/Pyotato/effective_typescript/assets/102423086/e0f2efb7-e7f6-4076-a468-4e682751e97f">
 
-이제 오류가 어디에서 발생했는지 찾을 수 있고, 제시된 해결책도 올바릅니다.
-의도를 명확히 해서 타입스크립트가 잠재적 문제점을 찾을 수 있게 했습니다.
-예를 들어, 타입 구문 없이 배열 안에서 딱 한번 capitol이라고 오타를 썼다면 오류가 되지 않았을 겂니다.
-그런데 타입 구문을 추가하면 오류를 찾을 수 있습니다.
+if 체크로 타입을 정제하는 방식은 매개변수 path가 절대 경로인지 또는 상대경로인지에 따라 분기하기 때문에 분기하는 이유를 주석으로 붙이기에도 좋습니다. 
+단, 주석이 오류를 방지해 주는 것은 아니라는 점은 주의해야 하겠습니다.
+반면, 로직을 분기하는 대신 오류가 발생한 곳에 `path as AbsolutePath`를 사용해서 오류를 제거할 수도 있지만 단언문은 지양해야 합니다. 단언문을 쓰지 않고 AbsolutePath 타입을 얻기 위한 유일한 방법은 AbsolutePath 타입을 매개변수로 받거나 타입이 맞는지 체크하는 것뿐입니다.
 
-<img width="1023" alt="image" src="https://github.com/Pyotato/effective_typescript/assets/102423086/b750eaaa-e818-441a-bf7e-53360acb0590">
-
-이 내용을 정리하자면, 그럼 1-1의 벤다이어그램에 새로운 영역을 추가할 수 있습니다. 그럼 1-2의 '타입 체커를 통과한 타입스크립트 프로그램' 영역입니다.
-"타입스크립트는 자바스크립트의 상위집합이다"라는 문장이 잘못된 것처럶 느껴진다면, 아마도 `타입 체커를 통과한 타입스크립트 프로그램`영역 때문일 것입니다.
-평소 작성하는 타입스크립트 코드가 바로 이 영역에 해당합니다.
-
-<img width="617" alt="image" src="https://github.com/Pyotato/effective_typescript/assets/102423086/d2f70571-f25c-4881-806f-ae1867a71b96">
-
-모든 자바스크립트는 타입스크립트지만, 일부 자바스크립트(그리고 타입스크립트)만이 타입 체크를 통과합니다.
-
-
-보통은 타입체크에서 오류가 발생하지 않도록 신경을 쓰며 타입스크립트 코드를 작성하기 때문입니다.
-
-타입스크립트 타입 시스템은 자바스크립트의 런타임 동작을 '모델링'합니다.
-런타임 체크를 엄격하게 하는 언어를 사용해 왔다면 다음 결과들이 꽤 당황스럽게 느껴질 수 있습니다.
-
-예를 들어, 다음 프로그램을 보겠습니다.
+상표 기법은 타입 시스템 내에서 표현할 수 없는 수많은 속성ㄷ르을 모델링하는 데 사용되기도 합니다. 예를 들어, 목록에서 한 요소를 찾기 위해 이진 검색을 하는 경우를 보겠습니다.
 
 ```ts
-const x = 2+'3'; // 정상, string 타입
-const y = '2'+3; // 정상, string 타입
+function BinarySearch<T>(xs: T[], x: T): boolean {
+  let low = 0, high = xs.length - 1;
+  while(high >= low){
+    const mid = low + Math.floor((high - low) /2);
+    const v= xs[mid];
+    if(v === x) return true;
+    [low, high] = x > v ? [mid + 1, high] : [low, mid - 1];
+  }
+  return false;
+}
 ```
 
-이 예제는 다른 언어였다면 런타임 오류가 될 만한 코드입니다. 
-하지만 타입스크립트의 타입체커는 정상으로 인식합니다.
-두 줄 모두 문자열 "23"이 되는 자바스크립트 런타임 동작으로 모델링됩니다.
+이진 검색은 이미 정렬된 상태를 가정하기 떄문에, 목록이 이미 정렬되어 있다면 문제가 없습니다. 하지만 목록이 정렬되어 있지 않다면 잘못된 결과가 나옵니다.
+타입스크립트 타입 시스템에서는 목록이 정렬되어 있다는 의도를 표현하기 어렵습니다. 
 
-반대로 정상 동작하는 코드에 오류를 표시하기도 합니다. 다음은 런타임 오류가 발생하지 않는 코드인데. 타입 체커는 문제점을 표시합니다.
+따라서 다음 예제처럼 상표 기법을 사용해 보겠습니다. 
 
 ```ts
-const a = null + 7; // 자바스크립트에서는 a값이 7이 됩니다.
-const b = [] + 12; // 자바스크립트에서는 b값이 12이 됩니다.
-alert('Hello', 'Typescript'); // 'Hello'를 표시합니다.
+type SortedList<T> = T[] & {_brand: 'sorted'};
+
+function istSorted<T>(xs: T[]) : xs is SortedList<T>{
+  for(let i=1; i < xs.length; i++){
+    if(xs[i] < xs[i-1]) return false
+  }
+  return true;
+}
+
+function BinarySearch<T>(xs: SortedList<T>, x: T): boolean {
+ // ...
+}
 ```
 
-<img width="1026" alt="image" src="https://github.com/Pyotato/effective_typescript/assets/102423086/f65ac6b7-3b27-4f8c-a00f-143951e3c3ab">
+binarySearch를 호출하려면, 정렬되었다는 상표가 붙은 SortedList 탕입의 값을 사용하거나 isSorted를 호출하여 정렬되었음을 증명해야 합니다.
+isSorted에서 목록 전체를 루프 도는 것이 효울적인 방법은 아니지만 적어도 안정성은 확보할 수 있습니다.
 
+앞의 예제는 타입 체커를 유용하게 사용하는 일반적인 패턴입니다. 
+예를 들어, 객체의 메서드를 호출하는 경우 null이 아닌 객체를 받거나 조건문을 사용해서 해당 객체가 null이 아닌지 체크하는 코드와 동일한 형태입니다.
+number 타입에도 상표를 붙일 수 있습니다. 
 
-자바스크립트의 런타임 동작을 모델링하는 것은 타입스크립트 타입 시스템의 기본원칙입니다.
-그러나 앞에서 봤던 경우들처럼 단순히 런타임 동작을 모델링하는 것뿐만 아니라 의도치 않는 이상한 코드가 오류로 이어질 수도 있다는 점을 고려해야 합니다.
-앞서 capital과 capitol 예제에서도 보았듯이, 프로그램에 오류가 발생하지 ㅇ낳더라도 (대신 undefined를 출력) 타입 체커가 오류를 표시합니다.
-
-언제 자바스크립트 런타임 동작을 그대로 모델링할지, 또는 추가적인 타입체크를 할지 분명하지 않다면 과연 타입스크립트를 사용해도 되는지 의문이 들 수 있습니다.
-타입스크립트 채택 여부는 온전히 여러분의 선택에 달렸습니다. 타입스크립트의 도움을 받으면 오류가 적은 코드를 작성할 수 있습니다.
-그러나 앞의 이상한 코드들처럼 null과 7을 더하거나, []과 12를 더하거나, 불필요한 매개변수를 추가해서 함수 호출하는 것을 당연하게 여긴다면 차라리 타입스크립트를 쓰지 않는 게 낫습니다. 
-
-작성된 프로그램이 타입 체크를 통과하더라도 여전히 런타임에 오류가 발생할 수 있습니다. 다음 예제를 보겠습니다. 
+예를 들어 단위를 붙여 보겠습니다. 
 
 ```ts
-const names = ['Alice', 'Bob'];
-console.log(names[2].toUpperCase());
+type Meters = number & {_brand: 'meters'};
+type Seconds = number & {_brand: 'seconds'};
+
+const meters = (m: number) => m as Meters;
+const seconds = (m: number) => m as Seconds;
+
+const oneKm = meters(1000);
+const oneMin = seconds(60);
+
 ```
 
-<img width="992" alt="image" src="https://github.com/Pyotato/effective_typescript/assets/102423086/32ae8d3c-9389-4093-9e39-4052b1607ebe">
+<img width="348" alt="image" src="https://github.com/Pyotato/effective_typescript/assets/102423086/f3c191d1-bbdb-461d-ba4f-9e6fd4159d44"/> <img width="348" alt="image" src="https://github.com/Pyotato/effective_typescript/assets/102423086/132a03ce-e224-47c3-8347-9b5373ff6ba5"/>
 
-프로그램을 실행하면 `TypeError: Cannot read property of 'toUpperCase' of undefined`과 같은 오류가 발생합니다.
 
-타입스크립트는 앞의 배열이 범위 내에서 사용될 것이라 가정했지만 실제로는 그렇지 않았고, 오류가 발생했습니다.
+number타입에 상표를 붙여도 산술 연산 후에는 상표가 없어지기 때문에 실제로 사용하기에는 무리가 있습니다.
 
-우리가 any타입을 사용할 때도 예상치 못한 오류가 자주 발생합니다.
-이 오류에 대해서는 [아이템 5](https://github.com/Pyotato/effective_typescript/blob/item5/README.md)에서 간단히 살펴보고, 5장에서 더욱 자세히 다룹니다. 
+```ts
+const temKm = oneKm*10;
+const v = oneKm / oneMin;
+```
 
-앞서 등장한 오류들이 발생하는 근본적인 우너인은 타입스크립트가 이해하는 값의 타입과 실제 값에 차이가 있기 때문입니다.
-타입 시스템이 정적 타입의 정확성을 보장해 줄 것 같지만 그럻지 않습니다. 
-애초에 타입 시스템은 그런 목적으로 만들어지지도 않았습니다.
-정확성을 보장하는 것이 중요하다면 Reason이나 Elm같은 언어를 선택하는 것이 좋습니다.
-그러나 Reason이나 Elm같은 언어에도 단점이 존재합니다. 
-이 언어들은 런타임 안정성을 보장하는 대신 자바스크립트의 상위집합이 아니기 때문에 마이그레이션 과정이 훨씬 복잡합니다.
+<img width="348" alt="image" src="https://github.com/Pyotato/effective_typescript/assets/102423086/6e52e55f-e3e3-4cd3-8ebe-6ece2d71a986"/><img width="348" alt="image" src="https://github.com/Pyotato/effective_typescript/assets/102423086/cb9e58cf-550a-4b90-8dda-2098f583f2b5"/>
 
+
+
+그러나 코드에 여러 단위가 혼합된 많은 수의 숫자가 들어 있는 경우, 숫자의 단위를 문서화하는 괜찮은 방법일 수 있습니다.
