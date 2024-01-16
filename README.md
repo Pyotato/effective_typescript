@@ -73,6 +73,7 @@
 
 | item |                                                  title                                                  | summary                                                                                                                                                                                                                                                                                             |
 | :--: | :-----------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------ |
+|  48  |     [API 주석에 TSDoc 사용하기](https://github.com/Pyotato/effective_typescript/blob/item48/README.md)     | 💡 익스포트된 함수, 클래스, 타입에 주석을 달 때는 JSDoc/TSDoc 형태를 사용합시다. JSDoc/TSDoc 형태의 주석을 달면 편집기가 주석 정보를 표시해 줍니다.  <br/> 💡 `@param`,`@returns` 구문과 문서 서식을 위해 마크다운을 사용할 수 있습니다. <br/> 💡 주석에 타입 정보를 포함하면 안됩니다. ([아이템 30](https://github.com/Pyotato/effective_typescript/blob/item30/README.md))  |
 
 
 ### 7장 : 코드를 작성하고 실행하기
