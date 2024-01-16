@@ -161,8 +161,8 @@ function getAuthors(database:PostgresDB): Author[]{
 }
 ```
 
-getAuthors함수를 테스트하기 위해서는 모킹한 PostgresDB를 생성해야 합니다.
-그러나 구조적 타이핑을 활용하여 더 구체적인 인터페이스를 정의하는 것이 더 나은 방법입니다.
+<p id="getAuthors">getAuthors함수를 테스트하기 위해서는 모킹한 PostgresDB를 생성해야 합니다.
+그러나 구조적 타이핑을 활용하여 더 구체적인 인터페이스를 정의하는 것이 더 나은 방법입니다.</p>
 
 runQuery 메서드가 있기 때문에 실제 환경에서도 getAuthors에 postgresDB를 사용할 수 있습니다. 
 구조적 타이핑 덕분에 postgresDB가 DB 인터페이스를 구현하는지 명확히 선언할 필요가 없습니다.
