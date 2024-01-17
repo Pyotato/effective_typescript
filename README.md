@@ -86,7 +86,7 @@ getComponent(vec,x);
 그리고 문자 리터럴 타입 'x'는 `'x'| 'y' | 'z'에 할당 가능하므로 코드가 타입 체커를 통과합니다.
 
 그러나 const는 만능이 아닙니다. 
-객체와 배열의 경우에는 여전히 문제가 있습니다. 아이템 초반에 있는 [mixed예제](https://github.com/Pyotato/effective_typescript/blob/item7/README.md#mixed)는 배열에 대한 문제를 보여 줍니다.
+객체와 배열의 경우에는 여전히 문제가 있습니다. 아이템 초반에 있는 [mixed예제](https://github.com/Pyotato/effective_typescript/blob/item21/README.md#mixed)는 배열에 대한 문제를 보여 줍니다.
 튜풀 타입을 추론해야할지, 요소들은 어떤 타입으로 추론해야 할지 알 수 없습니다. 비슷한 문제가 객체에서도 발생합니다.
 다음 코드는 자바스크립트에서 정상입니다.
 
