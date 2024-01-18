@@ -83,7 +83,7 @@ fetch의 타입 선언은 <i>lib.dom.ts</i>에 있으며 다음과 같습니다.
 
 ```ts
 declare function fetch(
-  inputL RequestInfo, init?: RequestInit
+  input: RequestInfo, init?: RequestInit
 ): Promise <Response>;
 ```
 
