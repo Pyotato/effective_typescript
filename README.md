@@ -62,6 +62,7 @@
 |  21  | [타입 넓히기](https://github.com/Pyotato/effective_typescript/blob/item21/README.md) | 💡 타입스크립트가 넗히기를 통해 상수의 타입을 추론하는 법을 이해해야 합니다. <br/>  💡 동작에 영향을 줄 수 있는 방법인 const, 타입 구문, 문맥, as const에 익숙해져야 합니다.                           |
 |  22  | [타입 좁히기](https://github.com/Pyotato/effective_typescript/blob/item22/README.md) | 💡 분기문 외에도 여러 종류의 제어 흐름을 살펴보며 타입스크립트가 타입을 좁히는 과정을 이해해야 합니다.<br/>  💡 태그된/구별된 유니온과 사용자 정의 타입 가드를 사용하여 타입 좁히기 과정을 원활하게 만들 수 있습니다.                           | 
 |  23  | [한꺼번에 객체 생성하기](https://github.com/Pyotato/effective_typescript/blob/item23/README.md) | 💡 속성을 제각각 추가하지 말고 한꺼번에 객체로 만들어야 합니다. 안전한 타입으로 속성을 추가하려면 객체 전개 `{...a, ...b}`를 사용하면 됩니다. <br/>  💡  객체에 조건부로 속성을 추가하는 방법을 익히도록 합니다.                           | 
+|  25  | [비동기 코드에는 콜백대신 async 함수 사용하기](https://github.com/Pyotato/effective_typescript/blob/item25/README.md) | 💡 콜백보다는 프로미스를 사용하는 게 코드 작성과 타입 추론 면에서 유리합니다.<br/> 💡 가능하면 프로미스를 생성하기보다는 async와 await를 사용하는 것이 좋습니다. 간결하고 직관적인 코드를 작성할 수 있고 모든 종류의 오류를 제거할 수 있습니다. <br/> 💡 어떤 함수가 프로미스를 반환한다면 async로 선언하는 것이 좋습니다.             | 
 
 
 ### 4장 : 타입 설계
