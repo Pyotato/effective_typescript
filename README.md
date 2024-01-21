@@ -40,6 +40,7 @@
 |  13  | [타입과 인터페이스의 차이점 알기](https://github.com/Pyotato/effective_typescript/blob/item13/README.md) | 💡 타입과 인터페이스의 차이점과 비슷한 점을 이해해야 합니다. <br/> 💡 한 타입을 type과 interface 두 가지 문법을 사용해서 작성하는 방법을 터득해야 합니다. <br/> 💡 프로젝트에서 어떤 문법을 사용할 지 결정 할 때 한 가지 일관된 스타일을 확립하고, 보강 기법이 필요한지 고려해야 합니다.  |
 |  14  | [타입 연산과 제너릭 사용으로 반복 줄이기](https://github.com/Pyotato/effective_typescript/blob/item14/README.md) | 💡 DRY(Don't Repeat Yourself) 원칙을 타입에도 최대한 적용해야 합니다. <br/> 💡 타입에 이름을 붙여서 반복을 피해야 합니다. extends를 사용해서 인터페이스 필드의 반복을 피해야 합니다. <br/> 💡 타입들 간의 매핑을 위해 타입스크립트가 제공한 도구들을 공부하면 좋습니다. 여기에는 `keyof`,`typeof`,인덱싱, 매핑된 타입들이 포함됩니다. <br/> 💡 제너릭 타입은 타입을 위한 함수와 같습니다. 타입을 반복하는 대신 제너릭 타입을 사용하며 타입들 간에 매핑을 하는 것이 좋습니다. 제너릭 타입을 제한하려면 extends를 사용하면 됩니다. <br/> 💡 표준 라이브러리에 정의된 `Pick, Partial, ReturnType`같은 제너릭 타입에 익숙해져야 합니다. |
 |  15  | [동적 데이터에 인덱스 시그니처 사용하기](https://github.com/Pyotato/effective_typescript/blob/item15/README.md) | 💡 런타임 때까지 객체의 속성을 알 수 없을 경우에만 (예를 들어 CSV 파일에서 로드하는 경우) 인덱스 시그니처를 사용하도록 합니다. <br/> 💡 안전한 접근을 위해 인덱스 시그니처의 값 타입에 `undefined`를 추가하는 것을 고려해야 합니다. <br/> 💡 가능하다면 인터페이스, Record, 매핑괸 타입 같은 인덱스 시그니처보다 정확한 타입을 사용하는 것이 좋습니다. |
+|  16  | [number 인덱스 시그니처보다는 Array, 튜플, ArrayLike를 사용하기](https://github.com/Pyotato/effective_typescript/blob/item16/README.md) | 💡 배열은 객체이므로 키는 숫자가 아니라 문자열입니다.인덱스 시그니처로 사용된 number 타입은 버그를 잡기 위한 순수 타입스크립트 코드입니다. <br/> 💡 인덱스 시그니처에 number를 사용하기 보다 Array나 튜플, 또는 ArrayLike타입을 사용하는 것이 좋습니다. |
 
 
 
