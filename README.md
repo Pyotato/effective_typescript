@@ -42,8 +42,8 @@
 |  14  | [타입 연산과 제너릭 사용으로 반복 줄이기](https://github.com/Pyotato/effective_typescript/blob/item14/README.md) | 💡 DRY(Don't Repeat Yourself) 원칙을 타입에도 최대한 적용해야 합니다. <br/> 💡 타입에 이름을 붙여서 반복을 피해야 합니다. extends를 사용해서 인터페이스 필드의 반복을 피해야 합니다. <br/> 💡 타입들 간의 매핑을 위해 타입스크립트가 제공한 도구들을 공부하면 좋습니다. 여기에는 `keyof`,`typeof`,인덱싱, 매핑된 타입들이 포함됩니다. <br/> 💡 제너릭 타입은 타입을 위한 함수와 같습니다. 타입을 반복하는 대신 제너릭 타입을 사용하며 타입들 간에 매핑을 하는 것이 좋습니다. 제너릭 타입을 제한하려면 extends를 사용하면 됩니다. <br/> 💡 표준 라이브러리에 정의된 `Pick, Partial, ReturnType`같은 제너릭 타입에 익숙해져야 합니다. |
 |  15  | [동적 데이터에 인덱스 시그니처 사용하기](https://github.com/Pyotato/effective_typescript/blob/item15/README.md) | 💡 런타임 때까지 객체의 속성을 알 수 없을 경우에만 (예를 들어 CSV 파일에서 로드하는 경우) 인덱스 시그니처를 사용하도록 합니다. <br/> 💡 안전한 접근을 위해 인덱스 시그니처의 값 타입에 `undefined`를 추가하는 것을 고려해야 합니다. <br/> 💡 가능하다면 인터페이스, Record, 매핑괸 타입 같은 인덱스 시그니처보다 정확한 타입을 사용하는 것이 좋습니다. |
 |  16  | [number 인덱스 시그니처보다는 Array, 튜플, ArrayLike를 사용하기](https://github.com/Pyotato/effective_typescript/blob/item16/README.md) | 💡 배열은 객체이므로 키는 숫자가 아니라 문자열입니다.인덱스 시그니처로 사용된 number 타입은 버그를 잡기 위한 순수 타입스크립트 코드입니다. <br/> 💡 인덱스 시그니처에 number를 사용하기 보다 Array나 튜플, 또는 ArrayLike타입을 사용하는 것이 좋습니다. |
-
-
+|  17  | [변경 관련된 오류 방지를 위해 readonly 사용하기](https://github.com/Pyotato/effective_typescript/blob/item17/README.md) | 💡 만약 함수가 매개변수를 수정하지 않는다면, `readonly`로 선언하는 것이 좋습니다. `readonly` 매개변수는 인터페이스를 명확하게 하며, 매개변수가 변경되는 것을 방지합니다. <br/> 💡 `readonly`를 사용하면 변경하면서 발생하는 오류를 방지할 수 있고, 변경ㅇ이 발생하는 코드도 쉽게 찾을 수 있습니다.<br/> 💡 const와 `readonly`의 차이를 이해해야 합니다. <br/> 💡 `readonly`는 얕게 동작한다는 것을 명심해야 합니다.|
+ 
 
 ### 3장 : 타입 추론
 
