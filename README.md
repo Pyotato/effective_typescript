@@ -43,7 +43,7 @@
 |  15  | [동적 데이터에 인덱스 시그니처 사용하기](https://github.com/Pyotato/effective_typescript/blob/item15/README.md) | 💡 런타임 때까지 객체의 속성을 알 수 없을 경우에만 (예를 들어 CSV 파일에서 로드하는 경우) 인덱스 시그니처를 사용하도록 합니다. <br/> 💡 안전한 접근을 위해 인덱스 시그니처의 값 타입에 `undefined`를 추가하는 것을 고려해야 합니다. <br/> 💡 가능하다면 인터페이스, Record, 매핑괸 타입 같은 인덱스 시그니처보다 정확한 타입을 사용하는 것이 좋습니다. |
 |  16  | [number 인덱스 시그니처보다는 Array, 튜플, ArrayLike를 사용하기](https://github.com/Pyotato/effective_typescript/blob/item16/README.md) | 💡 배열은 객체이므로 키는 숫자가 아니라 문자열입니다.인덱스 시그니처로 사용된 number 타입은 버그를 잡기 위한 순수 타입스크립트 코드입니다. <br/> 💡 인덱스 시그니처에 number를 사용하기 보다 Array나 튜플, 또는 ArrayLike타입을 사용하는 것이 좋습니다. |
 |  17  | [변경 관련된 오류 방지를 위해 readonly 사용하기](https://github.com/Pyotato/effective_typescript/blob/item17/README.md) | 💡 만약 함수가 매개변수를 수정하지 않는다면, `readonly`로 선언하는 것이 좋습니다. `readonly` 매개변수는 인터페이스를 명확하게 하며, 매개변수가 변경되는 것을 방지합니다. <br/> 💡 `readonly`를 사용하면 변경하면서 발생하는 오류를 방지할 수 있고, 변경ㅇ이 발생하는 코드도 쉽게 찾을 수 있습니다.<br/> 💡 const와 `readonly`의 차이를 이해해야 합니다. <br/> 💡 `readonly`는 얕게 동작한다는 것을 명심해야 합니다.|
- 
+|  18  | [매핑된 타입을 사용하여 값을 동기화하기](https://github.com/Pyotato/effective_typescript/blob/item18/README.md) | 💡 매핑된 타입을 사용해서 관련된 값과 타입을 동기화하도록 합니다. <br/> 💡 인터페이스에 새로운 속성을 추가할 떄, 선택을 강제하도록 매핑된 타입을 고려해야 합니다.|
 
 ### 3장 : 타입 추론
 
