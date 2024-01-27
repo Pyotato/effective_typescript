@@ -100,6 +100,7 @@
 |  32  | [유니온의 인터페이스보다는 인터페이스의 유니온 사용하기](https://github.com/Pyotato/effective_typescript/blob/item32/README.md) | 💡 유니온 타입의 속성을 여러 개 가지는 인터페이스에서는 속성 간의 관계가 분명하지 않기 때문에 실수가 자주 발생하므로 주의해야 합니다. <br/> 💡 유니온의 인터페이스보다 인터페이스의 유니온이 더 정확하고 타입스크립트가 이해하기도 좋습니다. <br/> 💡 타입스크립트가 제어 흐름을 분석할 수 있도록 타입에 태그를 넣는 것을 고려해야 합니다. 태그된 유니온은 타입스크립트와 매우 잘 맞기 때문에 자주 볼 수 있는 패턴입니다.                                                                                                   |
 |  33  | [string 타입보다 더 구체적인 타입 사용하기](https://github.com/Pyotato/effective_typescript/blob/item33/README.md) | 💡 | 
 |  34  | [](https://github.com/Pyotato/effective_typescript/blob/item34/README.md) | 💡 | 
+|  36  | [해당 분야의 용어로 타입 이름 짓기](https://github.com/Pyotato/effective_typescript/blob/item36/README.md) | 💡 가독성을 높이고, 추상화 수준을 올리기 위해서 해당 분야의 용어를 사용해야 합니다.<br/> 💡 같은 의미에 다른 이름을 붙이면 안됩니다. 특별한 의미가 있을 때만 용어를 구분해야 합니다. |
 |  37  | [공식 명칭에는 상표를 붙이기](https://github.com/Pyotato/effective_typescript/blob/item37/README.md) | 💡 타입스크립트는 구조적 타이핑(덕 타이핑)을 사용하기 때문에, 값을 세밀하게 구분하지 목하는 경우가 있습니다. 값을 구분하기 위해 공식 명칭이 필요하다면 상표를 붙이는 것을 고려해야합니다. <br/> 💡 상표 기법은 타입 시스템에서 동작하지만 런타임에 상표를 검사하는 것과 동일한 효과를 얻을 수 있습니다.<br/>                                                                                        |
 
 ### 5장 : any 다루기
