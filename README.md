@@ -101,7 +101,8 @@
 |  33  | [string 타입보다 더 구체적인 타입 사용하기](https://github.com/Pyotato/effective_typescript/blob/item33/README.md) | 💡 | 
 |  34  | [](https://github.com/Pyotato/effective_typescript/blob/item34/README.md) | 💡 | 
 |  36  | [해당 분야의 용어로 타입 이름 짓기](https://github.com/Pyotato/effective_typescript/blob/item36/README.md) | 💡 가독성을 높이고, 추상화 수준을 올리기 위해서 해당 분야의 용어를 사용해야 합니다.<br/> 💡 같은 의미에 다른 이름을 붙이면 안됩니다. 특별한 의미가 있을 때만 용어를 구분해야 합니다. |
-|  37  | [공식 명칭에는 상표를 붙이기](https://github.com/Pyotato/effective_typescript/blob/item37/README.md) | 💡 타입스크립트는 구조적 타이핑(덕 타이핑)을 사용하기 때문에, 값을 세밀하게 구분하지 목하는 경우가 있습니다. 값을 구분하기 위해 공식 명칭이 필요하다면 상표를 붙이는 것을 고려해야합니다. <br/> 💡 상표 기법은 타입 시스템에서 동작하지만 런타임에 상표를 검사하는 것과 동일한 효과를 얻을 수 있습니다.<br/>                                                                                        |
+|  37  | [공식 명칭에는 상표를 붙이기](https://github.com/Pyotato/effective_typescript/blob/item37/README.md) | 💡 타입스크립트는 구조적 타이핑(덕 타이핑)을 사용하기 때문에, 값을 세밀하게 구분하지 목하는 경우가 있습니다. 값을 구분하기 위해 공식 명칭이 필요하다면 상표를 붙이는 것을 고려해야합니다. <br/> 💡 상표 기법은 타입 시스템에서 동작하지만 런타임에 상표를 검사하는 것과 동일한 효과를 얻을 수 있습니다.<br/> |
+
 
 ### 5장 : any 다루기
 
@@ -118,6 +119,7 @@
 
 | item |                                                  title                                                  | summary                                                                                                                                                                                                                                                                                             |
 | :--: | :-----------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------ |
+|  38  | [any 타입은 가능한 한 좁은 범위에서만 사용하기](https://github.com/Pyotato/effective_typescript/blob/item38/README.md) | 💡 의도치 않은 타입 안전성의 손실을 피하기 위해서 `any`의 사용 범위를 최소한으로 좁혀야 합니다.<br/> 💡 함수의 반환 타입이 `any`인 경우 타입 안전성이 나빠집니다. 따라서 `any`타입을 반환하면 절대 안됩니다.<br/> 💡 강제로 타입 오류를 제거하려면 any대신 `@ts-ignore`를 사용하는 것이 좋습니다. |
 |  39  | [ any를 구체적으로 변형해서 사용하기](https://github.com/Pyotato/effective_typescript/blob/item39/README.md) | 💡 any를 사용할 때는 정말로 모든 값이 허용되어야만 하는지 면멸히 검토해야 합니다.  <br/> 💡 any보다 더 정확하게 모델링 할 수 있도록 `any[]` 또는 `{[id: string]: any }` 또는  `() => any` 처럼 구체적인 형태를 사용해야 합니다.     |
 |  40  | [함수 안으로 타입 단언문 감추기](https://github.com/Pyotato/effective_typescript/blob/item40/README.md) | 💡 타입 선언문은 일반적으로 타입을 위험하게 만들지만 상황에 따라 필요하기도 하고 현실적인 해결책이 되기도 합니다. 불가피하게 사용해야한다면, 정확한 정의를 가지는 함수 안으로 숨기도록 합니다.                                                                                                       |
 |  41  | [any의 진화를 이해하기](https://github.com/Pyotato/effective_typescript/blob/item41/README.md) | 💡 일반적으로 타입들은 정제되기만 하는 반면, 암시적 any와 `any[]`타입은 진화할 수 있습니다. 이러한 동작이 발생하는 코드를 인지하고 이해할 수 있어야 합니다. <br/> 💡 any를 진화시키는 방식보다는 명시적 타입 구문을 사용하는 것이 안전한 타입을 유지하는 방법입니다.                                                                                                       |
