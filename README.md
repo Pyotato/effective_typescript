@@ -1,114 +1,91 @@
-# 🐒 ITEM 43 : 몽키패치보다는 안전한 타입 사용하기
+# 🛤️ ITEM 44 : 타입 커버리지를 추적하여 타입 안전성 유지하기
 
-자바스크립트의 가장 유명한 특징 중 하나는, 객체와 클래스에 임의의 속성을 추가할 수 있을 만틈 유연하다는 것입니다.
-객체에 속성을 추가할 수 있는 기능은 종종 웹 페이지에서 `window`나 `document`에 값을 할당하여 전역 변수를 만드는 데 사용합니다.
+`noImplicitAny`를 설정하고 모든 암시적 `any` 대신 명시적 타입 구문을 추가해도 `any`타입과 관련된 문제들로부터 안전하다고 할 수 없습니다.
+`any`타입이 여전히 프로그램 내에 존재할 수 있는 두 가지 경우가 있습니다.
 
-```ts
-window.monkey = 'Tamarin';
-window.monkey = 'Howler';
-```
+- 명시적 `any`타입
+  [아이템 38](https://github.com/Pyotato/effective_typescript/blob/item38/README.md)과 [아이템 39](https://github.com/Pyotato/effective_typescript/blob/item39/README.md)의 내용에 따라 `any`타입의 범위를 좁히고 구체적으로 만들어도 여전히 `any`타입입니다. 특히 `any[]`와 `{[key:string]: any}` 같은 타입은 타입 인덱스를 생성하면 단순 `any`가 되고 코드 전반에 영향을 미칩니다.
 
-또는 DOM 엘리먼트에 데이터를 추가하기 위해서도 사용됩니다.
+- 서드파티 타입 선언
+  이 경우는 `@types` 선언 파일로부터 `any`타입이 전파되기 때문에 특별히 조심해야 합니다.
+  `noImplicitAny`를 설정하고 절대 `any`를 사용하지 않았다 하더라도 여전히 `any`타입은 코드 전반에 영향을 미칩니다.
 
-```ts
-const el = document.getElementById('colobus');
-el.home = 'tree';
-```
+`any`타입은 타입 안전성과 생산성에 부정적 영향을 미칠 수 있으므로 ([아이템 5](https://github.com/Pyotato/effective_typescript/blob/item5/README.md)), 프로젝트에서 `any`의 개수를 추적하는 것이 좋습니다.
+npm의 type-coverage 패키지를 활용하여 `any`를 추적할 수 있는 몇 가지 방법이 있습니다.
 
-객체에 속성을 추가하는 코드 스타일은 특히 제이쿼리(jQuery)를 사용하는 코드에서 흔히 볼 수 있습니다.
+> $ npx type-coverage <br/>
+> 9985/10117 98.69%
+  
+![image](https://github.com/Pyotato/effective_typescript/assets/102423086/614f4d0e-28b5-4040-b763-5f88f4935959)
 
-심지어 내장 기능의 프로토타입에도 속성을 추가할 수 있습니다.
-그런데 이상한 결과를 보일 때가 있습니다.
+결과를 통해 이 프로젝트의 10,117심벌 중 9,985ro (98.69%)가 `any`가 아니거나 `any`의 별칭이 아닌 타입을 가지고 있음을 알 수 있습니다.
+실수로 `any`타입이 추가된다면 백분율(%)이 감소하게 됩니다.
 
-```ts
-Regex.prototype.mokey = 'Capuchin'
-//"Capuchin"
-/123/.monkey;
-//"Capuchin"
-```
+앞 결과의 백분율은 5장의 다른 아이템에서 소개한 조언들을 얼마나 잘 따랐는지에 대한 점수라고 할 수 있습니다.
+그러므로 점수를 추적함으로써 시간이 지남에 따라 코드의 품질을 높일 수 있습니다.
 
-정규식`(/123/)`에 monkey라는 속성을 추가한 적이 없는데 "Capuchin"이라는 값이 들어 있습니다.
-사실 객체에 임의의 속성을 추가하는 것은 일반적으로 좋은 설계가 아닙니다.
-예를 들어 window 또는 DOM 노드에 데이터를 추가한다고 가정해 보겠습니다.
-그러면 그 데이터는 기본적으로 전역 변수가 됩니다.
-전역 변수를 사용하면 은연중에 프로그램 내에서 서로 멀리 떨어진 부분들 간에 의존성을 만들게 됩니다.
-그러면 함수를 호출할 때마다 부작용 (side effect)을 고려해야만 합니다.
+타입 커버리지 정보를 수집해 보는 것도 유용할 수 있습니다.
+`type-coverage`를 실행할 때, `--detail` 플래그를 붙이면, `any` 타입이 있는 곳을 모두 출력해 줍니다.
 
-타입스크립트까지 더하면 또 다른 문제가 발생합니다.
-타입 체커는 Document와 HTMLElement의 내장 속성에 대해서는 알고 있지만, 임의로 추가한 속성에 대해서는 알지 못합니다.
+> $ npx type-coverage --detail <br/>
+> path/to/code.ts 1:10 getColumnInfo <br/>
+> path/to/module.ts 7:1 pt2
+  
+이것을 조사해 보면 미처 발견하지 못한 `any`의 근원지를 찾을 수도 있습니다.
 
-```ts
-document.monkey = 'Tamarin';
-```
+코드에 `any`가 남아 있는 이유는 다양합니다.
+오류를 간단히 해결하기 위해 종종 명시적으로 `any`를 선언했을 수 있습니다.
+타입 오류가 발생했지만 해결하는 데 시간을 쏟고 싶지 않았을 수도 있습니다.
+또는 아직까지 타입을 제대로 작성하지 못했을 수도 있습니다.
+아니면 급하게 작업하느라 `any`인 채로 놔두었을 수도 있습니다.
 
-<img width="789" alt="image" src="https://github.com/Pyotato/effective_typescript/assets/102423086/ff4a1960-3e24-43ef-bae7-e04d2520e146"/>
-
-이 오류를 해결하는 가장 간단한 방법은 any 단언문을 사용하는 것입니다.
+`any`가 등장하는 몇 가지 문제와 그 해결책을 살펴보겠습니다.
+표 현태의 데이터에서 어떤 종류의 열(column) 정보를 만들어 내는 함수를 만든다고 가정해 봅시다.
 
 ```ts
-(document as any).monkey = 'Tamarin';
-```
-
-타입 체커는 통과하지만 단점이 있습니다.
-any를 사용함으로써 타입 안전성을 상실하고, 언어 서비스를 사용할 수 없게 된다는 것입니다.
-
-```ts
-(document as any).monky = 'Tamarin';   // 오타지만 정상
-(document as any).monkey = 'Tamarin';  // 타입이 잘못됐지만 정상
-```
-
-최선의 해결책은 docmeent 또는 DOM으로부터 데이터를 분리하는 것입니다.
-분리할 수 없는 경우 (객체와 데이터가 붙어 있어야만 하는 라이브러리를 사용중이거나 자바스크립트 애플리케이션을 마이그레이션하는 과정 중이라면), 두 가지 차선책이 존재합니다.
-
-```ts
-interface Document {
-  /** 몽키 패치의 속(genus) 또는 종 (species) */
-  monkey : string;
+function getColumnInfo(name: string): any{
+  return utils.buildColumnInfo(appstate.dataSchema, name); // any 반환
 }
-document.monkey = 'Tamarin';  // 정상
 ```
 
-보강을 사용하는 방법이 `any`보다 나은 점은 다음과 같습니다.
+`util.buildColumnInfo` 호출은 `any`를 반환합니다.
+그래서 `getColumnInfo` 함수의 반환에는 주석과 함께 명시적으로 `: any` 구문을 추가했습니다.
 
-- 타입이 더 안전합니다. 타입 체커는 오타나 잘못된 타이브이 할당을 오류로 표시합니다.
-- 속성에 주석을 붙일 수 있습니다 ([아이템 48](https://github.com/Pyotato/effective_typescript/blob/item48/README.md)).
-- 속성에 자동완성을 사용할 수 있습니다.
-- 몽키 패치가 어떤 부분에 적용되었는지 정확한 기록이 남습니다.
+이후에 타입 정보를 추가하기 위해 `ColumnInfo` 타입을 정의하고 `util.buildColumnInfo`가 `any`대신 `ColumnInfo`를 반환하도록 개선해도 `getColumnInfo`함수의 반환문에 있는 `any`타입이 모든 타입 정보를 날려 버리게 됩니다.
+`getColumnInfo`에 남아 있는 `any`까지 제거해야 문제가 해결됩니다.
 
-그리고 모듈의 관점에서 (타입스크립트 파일이 `import/export`를 사용하는 경우), 제대로 동작하게 하려면 `global` 선언을 추가해야 합니다.
+서드파티 라이브러리로부터 비롯되는 `any`타입은 몇 가지 형태로 등장할 수 있지만 가장 극단적인 예는 전체 모듈에 `any`타입을 부여하는 것입니다.
 
 ```ts
-import [};
-declare global {
-  interface Document {
-    /** 몽키 패치의 속(genus) 또는 종 (species) */
-    monkey : string;
-  }
-}
-
-document.monkey = 'Tamarin';  // 정상
+declare module 'my-module';
 ```
 
-보강을 사용할 때 주의해야 할 점은 모듈 영역(scope)과 관련이 있습니다.
-보강은 전역적으로 적용되기 때문에, 코드의 다른 부분이나 라이브러리로부터 분리할 수 없습니다.
-그리고 애플리케이션이 실행되는 동안 속성을 할당하면 실행 시점에서 보강을 적용할 방법이 없습니다.
-특히 웹 페이지 내의 HTML 엘리먼트를 조작할 때, 어떤 엘리먼트는 속성이 있고 어떤 엘리먼트는 속성이 없는 경우 문제가 됩니다.
-이러한 이유로 속성을 `string|undefined`로 선언할 수도 있습니다.
-이렇게 선언하면 더 정확할 수 잇지만 다루기에는 더 불편해집니다.
-
-두 번째, 더 구체적인 타입 단언문을 사용하는 것입니다.
+앞의 선언으로 인해 `my-module`에서 어떤 것이든 오류 없이 임포트 할 수 있습니다.
+임포트한 모든 심벌은 `any`타입이고, 임포트한 값이 사용되는 곳마다 `any` 타입을 양산하게 됩니다.
 
 ```ts
-interface MonkeyDocument extends Document{
-    /** 몽키 패치의 속(genus) 또는 종 (species) */
-    monkey : string;
-  }
-}
-
-(document as MonkeyDocument).monkey = 'Tamarin';  // 정상
+import {someMethod, someSymbol} from 'my-module';   //  정상
+const pt1 = {                                       // {x: number, y: number} 타입 
+  x:1,
+  y:2,
+}  
+const pt2 = someMethod(pt1, someSymbol);             // 타입이 any
 ```
 
-MonkeyDocument는 Document를 확장하기 때문에 ([아이템 9](https://github.com/Pyotato/effective_typescript/blob/item9/README.md)) 타입 단언문은 정상이며 할당문의 타입은 안전합니다.
-또한 Document 타입을 건드리지 않고 별도로 확장하는 새로운 타입을 도입했기 때문에 모듈 영역 문제도 해결할 수 있습니다 (import하는 곳의 영역에만 해당됨). 
-따라서 몽키 패치된 속성을 참조하는 경우에만 단언문을 사용하거나 새로운 변수를 도입하면 됩니다.
-그러나 몽키 패치를 남용해서는 안 되며 궁극적으로 더 잘 설계된 구조로 리팩터링하는 것이 좋습니다.
+일반적인 모듈의 사용법과 동일하기 때문에, 타입 정보가 모두 제거됐다는 것을 간과할 수 있습니다.
+또는 동료가 모든 타입 정보를 날려 버렸지만, 알아채지 못하는 경우일 수도 있습니다.
+그렇기 때문에 가끔 해당 모듈을 점검해야 합니다.
+어느 순간 모듈에 대한 공식 타입 선언이 릴리스되었을지도 모릅니다.
+또는 모듈을 충분히 이해한 후에 직접 타입 선언을 작성해서 커뮤니티에 공개할 수도 있습니다.
+
+서드파티 라이브러리로부터 비롯되는 `any`의 또 다른 형태는 타입에 버그가 있는 경우입니다.
+예를 들어 [아이템 29](https://github.com/Pyotato/effective_typescript/blob/item29/README.md)의 조언 (값을 생성할 때는 엄격하게 타입 적용)을 무시한 채로, 함수가 유니온 타입을 반환하도록 선언하고 실제로는 유니온 타입보다 훨씬 더 특정된 값을 반환하는 경우입니다.
+
+선언된 타입과 실제 반환된 타입이 맞지 않는다면 어쩔 수 없이 `any` 단언문을 사용해야 합니다.
+그러나 나중에 라이브러리가 업데이트되어 함수의 선언문이 제대로 수정된다면 `any`를 제거해야 합니다.
+또는 직접 라이브러리의 선언문을 수정하고 커뮤니티에 공개할 수도 있습니다.
+
+`any`타입이 사용되는 코드가 실제로는 더 이상 실행되지 않는 코드일 수 있습니다.
+또는 어쩔 수 없이 `any`를 사용했던 부분이 개선되어 제대로 된 타입으로 바뀌었다면 `any`가 더 이상 필요 없을 수도 있습니다.
+버그가 있는 타입 선언문이 업데이트되어 제대로 타입 정보를 가질 수도 있습니다.
+타입 커버리지를 추적하면 이러한 부분들을 쉽게 발견할 수 있기 때문에 코드를 꾸준히 점검할 수 있게 해 줍니다.
