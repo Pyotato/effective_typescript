@@ -125,7 +125,7 @@
 |  41  | [any의 진화를 이해하기](https://github.com/Pyotato/effective_typescript/blob/item41/README.md) | 💡 일반적으로 타입들은 정제되기만 하는 반면, 암시적 any와 `any[]`타입은 진화할 수 있습니다. 이러한 동작이 발생하는 코드를 인지하고 이해할 수 있어야 합니다. <br/> 💡 any를 진화시키는 방식보다는 명시적 타입 구문을 사용하는 것이 안전한 타입을 유지하는 방법입니다.                                                                                                       |
 |  42  | [모르는 타입의 값에는 any대신 unknown을 사용하기](https://github.com/Pyotato/effective_typescript/blob/item42/README.md) | 💡 `unknown`은 `any`대신 사용할 수 있는 안전한 타입입니다. 어떠한 값이 있지만 그 타입을 알지 못하는 경우라면 `unknown`을 사용하면 됩니다.💡 사용자가 타입 단언문이나 타입 체크를 사용하도록 강제하려면 `unknown`을 사용하면 됩니다. <br/>💡 `{}`,`object`, `unknown`의 차이점을 이해해야 합니다. |
 |  43  | [몽키패치보다는 안전한 타입 사용하기](https://github.com/Pyotato/effective_typescript/blob/item43/README.md) | 💡 전역 변수나 DOM에 데이터를 저장하지 말고, 데이터를 분리하여 사용해야 합니다. <br/>💡 내장 타입에 데이터를 저장해야 하는 경우, 안전한 타입 접근법 중 하나 (보강이나  사용자 정의 인터페이스로 단언)를 사용해야 합니다. <br/>💡 보강의 모듈 영역 문제ㅔ를 이해해야 합니다.|
-|  44  | [타입 커버리지를 추적하여 타입 안전성 유지하기](https://github.com/Pyotato/effective_typescript/blob/item44/README.md) | 💡  <br/>|
+|  44  | [타입 커버리지를 추적하여 타입 안전성 유지하기](https://github.com/Pyotato/effective_typescript/blob/item44/README.md) | 💡 `noImplicitAny`가 설정되어 있어도, 명시적 `any` 또는 서드파티 타입 선언(`@types`)을 통해 `any`타입은 코드 내에 여전히 존재할 수 있다는 점을 주의해야 합니다.<br/>💡 작성한 프로그램의 타입이 얼마나 잘 선언되었는지 추적해야 합니다. 추적함으로써 `any`의 사용을 줄여 나갈 수 있고 타입 안전성을 꾸준히 높일 수 있습니다.  |
 
 ### 6장 : 타입 선언과 @types
 
