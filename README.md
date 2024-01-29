@@ -52,7 +52,7 @@ NodeJS 기반 타입스크립트 사용자에게는 변화가 없지만, 웹 기
 그러나 프로젝트의 의존성이 다양해지고 필수 의존성이 추가됨에 따라 미러링 기법을 적용하기가 어려워집니다.
 다른 라이브러리의 타입 선언의 대부분을 추출해야 한다면, 차라리 명시적으로 `@types` 의존성을 추가하는 게 낫습니다.
 
-미러링 기법은 유닛 테스트와 상용 시스템 간의 이존성을 분리하는 데도 유용합니다. 자세한 내용은 [아이템 4의 getAuthors 예제](https://github.com/Pyotato/effective_typescript/blob/item4/README.md#getAuthors)를 참고하시길 바랍니다.
+미러링 기법은 유닛 테스트와 상용 시스템 간의 의존성을 분리하는 데도 유용합니다. 자세한 내용은 [아이템 4의 getAuthors 예제](https://github.com/Pyotato/effective_typescript/blob/item4/README.md#getAuthors)를 참고하시길 바랍니다.
 
 
 
