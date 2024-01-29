@@ -117,7 +117,7 @@ interface CameraOptions {
 앞에서 설명한 CameraOptions를 선언하는 두 가지 방식 모두 focusOnFeature 함수가 타입 체커를 통과할 수 있게 합니다.
 
 ```ts
-function FocusOnFeature(f: Feature){
+function FocusOnFeature(f: Feature){
   const bounds = calculateBoundingBox(f);
   const camera = viewportForBounds(bounds);
   setCamera(camera);
