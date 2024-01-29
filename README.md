@@ -143,6 +143,7 @@
 |  48  |     [API 주석에 TSDoc 사용하기](https://github.com/Pyotato/effective_typescript/blob/item48/README.md)     | 💡 익스포트된 함수, 클래스, 타입에 주석을 달 때는 JSDoc/TSDoc 형태를 사용합시다. JSDoc/TSDoc 형태의 주석을 달면 편집기가 주석 정보를 표시해 줍니다.  <br/> 💡 `@param`,`@returns` 구문과 문서 서식을 위해 마크다운을 사용할 수 있습니다. <br/> 💡 주석에 타입 정보를 포함하면 안됩니다. ([아이템 30](https://github.com/Pyotato/effective_typescript/blob/item30/README.md))  |
 |  49  |     [콜백에서 this에 대한 타입 제공하기](https://github.com/Pyotato/effective_typescript/blob/item49/README.md)     | 💡 this 바인딩이 동작하는 원리를 이해해야 합니다. <br/> 💡 콜백 함수에서 this를 사용해야 한다면, 타입 정보를 명시해야 합니다.  |
 |  50  |     [오버로딩 타입보다 조건부 타입 사용하기](https://github.com/Pyotato/effective_typescript/blob/item50/README.md)     | 💡 오버로딩 타입보다 조건부 타입을 사용하는 것이 좋습니다. 조건부 타입은 추가적인 오버로딩 없이 유니온 타입을 지원할 수 있습니다.  |
+|  51  |     [의존성 분리를 위해 미러 타입 사용하기](https://github.com/Pyotato/effective_typescript/blob/item51/README.md)     | 💡 필수가 아닌 의존성을 분리할 때는 구조적 타이핑을 사용하면 됩니다. <br/> 💡 공개한 라이브러리를 사용하는 자바스크립트 사용자가 `@types` 의존성을 가지지 않게 해야 합니다. 그리고 웹 개발자가 Nodejs 관련된 의존성을 가지지 않게 해야 합니다.  |
 
 
 
