@@ -156,7 +156,8 @@
 |  53  |     [타입스크립트 기능보다는 ECMAScript 기능을 사용하기](https://github.com/Pyotato/effective_typescript/blob/item53/README.md)     | 💡 일반적으로 타입스크립트 코드에서 모든 타입 정보를 제거하면 자바스크립트가 되지만, 열거형, 매개변수 속성, 트리플 슬래시 임포트, 데코레이터는 타입 정보를 제거한다고 자바스크립트가 되지 않습니다. <br/> 💡 타입스크립트의 역할을 명확하게 하려면, 열거형, 매개변수 속성, 트리플 슬래시 임포트, 데코레이터는 사용하지 않는 것이 좋습니다. |
 |  54  |     [객체를 순회하는 노하우](https://github.com/Pyotato/effective_typescript/blob/item54/README.md)     | 💡 객체를 순회할 때, 키가 어떤 타입인지 정확히 파악하고 있다면 `let k : keysof T`와 `for-in` 루프를 사용합시다. 함수의 매개변수로 쓰이는 객체에는 추가적인 키가 존재할 수 있다는 점을 명심합시다. <br/> 💡 객체를 순회하며 키와 값을 얻는 가장 일반적인 방법은 `Object.entries` 를 사용하는 것입니다. |
 |  55  |     [DOM 계층 구조 이해하기](https://github.com/Pyotato/effective_typescript/blob/item55/README.md)     | 💡 자바스크립트를 사용할 때는 신경 쓰지 않았겠지만, DOM에는 타입 계층 구조가 있습니다. DOM 타입은 타입스크립트에서 중요한 정보이며, 브라우저 관련 프로젝트에서 타입스크립트를 사용할 때 유용합니다. <br/> 💡 Node, Element, HTMLElement, EventTarget 간의 차이점, 그리고 Event와 MouseEvent의 차이점을 알아야 합니다. <br/> 💡 DOM 엘리먼트와 이번트에는 충분히 구처적인 타입 정보를 사용하거나 타입스크립트가 추론할 수 있도록 문맥 정보를 활용해야 합니다.|
-|  56  |     [정보를 감추는 목적으로 private 사용하지 않기](https://github.com/Pyotato/effective_typescript/blob/item56/README.md)     | 💡  public, protected, private 접근 제어자는 타입 시스템에서만 강제될 뿐입니다. 런타임에는 소용이 없으며 단언문을 통해 우회할 수 있습니다. 접근 제어자로 데이터를 감추려고 해서는 안됩니다.<br/>💡 확실히 데이터를 갘추고 싶다면 클로저를 사용해야 합니다. |
+|  56  |     [정보를 감추는 목적으로 private 사용하지 않기](https://github.com/Pyotato/effective_typescript/blob/item56/README.md)     | 💡 public, protected, private 접근 제어자는 타입 시스템에서만 강제될 뿐입니다. 런타임에는 소용이 없으며 단언문을 통해 우회할 수 있습니다. 접근 제어자로 데이터를 감추려고 해서는 안됩니다.<br/>💡 확실히 데이터를 갘추고 싶다면 클로저를 사용해야 합니다. |
+|  57  |     [정보를 감추는 목적으로 private 사용하지 않기](https://github.com/Pyotato/effective_typescript/blob/item57/README.md)     | 💡 원본 코드가 아닌 변환된 자바스크립트 코드를 디버깅하지 맙시다. 소스맵을 사용해서 런타임에 타입스크립트 코드를 디버깅합기다. <br/>💡 소스맵이 최종적으로 변환된 코드에 완전히 매핑되었는지 확인합시다. <br/>💡 소스맵에 원본 코드가 그대로 포함되도록 설정되어 있을 수도 있습니다. 공개되지 않도록 설정을 확인합시다. |
 
 ### 8장 : 타입스크립트로 마이그레이션하기
 
