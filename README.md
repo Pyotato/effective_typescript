@@ -139,7 +139,7 @@ document.getElementById("my-div") as HTMLDivElement;
 
 <img width="955" alt="image" src="https://github.com/Pyotato/effective_typescript/assets/102423086/719c205c-a3be-47d2-b70b-6953accce715"/>
 
-[표](#table)에서 살펴봤던 `EventTarget` 타입의 계층 구조뿐 아니라, `Event`타입에도 별도의 계층 구조가 있습니다.
+[표](https://github.com/Pyotato/effective_typescript/blob/item55/README.md#table)에서 살펴봤던 `EventTarget` 타입의 계층 구조뿐 아니라, `Event`타입에도 별도의 계층 구조가 있습니다.
 Mozilla 문서에는 52개 이상의 Event 종류가 나열되어 있습니다.
 
 Event는 가장 추상화된 이벤트입니다.
