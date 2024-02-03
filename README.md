@@ -278,7 +278,7 @@ function add(a: Vector2D, b: Vector2D){
 
 <img width="491" alt="image" src="https://github.com/Pyotato/effective_typescript/assets/102423086/1dc0c112-67a8-4016-83bb-64bc599bb932"/>
 
-반환 타입을 면시하면 더욱 직관적인 표현이 됩니다. 그리고 바환 값을 별도의 타입으로 정의하면 타입에 대한 주석을 작성할 수 있어서 ([아이템 48](https://github.com/Pyotato/effective_typescript/blob/item48/README.md)), 더욱 자세한 설명이 가능합니다. 추론된 반환 타입이 복잡해질수록 명명된 타입을 제공하는 이점은 커집니다.
+반환 타입을 면시하면 더욱 직관적인 표현이 됩니다. 그리고 반환 값을 별도의 타입으로 정의하면 타입에 대한 주석을 작성할 수 있어서 ([아이템 48](https://github.com/Pyotato/effective_typescript/blob/item48/README.md)), 더욱 자세한 설명이 가능합니다. 추론된 반환 타입이 복잡해질수록 명명된 타입을 제공하는 이점은 커집니다.
 
 린터(linter)를 사용하고 있다면 `eslint` 규칙 중 `no-inferrable-types` (철자주의! r이 두개)을 사용해서 작성된 모든 타입 구문이 정말로 필요한지 확인할 수 있습니다.
 
