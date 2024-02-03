@@ -3,7 +3,7 @@
 > 컴퓨터 과학에서 어려운 일은 단 두 가지뿐이다. 캐시 무효화와 이름 짓기.
 >  <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - 필 카튼
 
-지금까지 타입의 형태와 갑스이 집합에 대해 수없이 다루었지만, 타입의 이름을 짓는 것에 대해서는 거의 언급하지 않았습니다.
+지금까지 타입의 형태와 값의 집합에 대해 수없이 다루었지만, 타입의 이름을 짓는 것에 대해서는 거의 언급하지 않았습니다.
 그러나 이름 짓기 역시 타입 설계에서 중요한 부분입니다.
 엄선된 타입, 속성, 변수의 이름은 의도를 명확히 하고 코드와 타이브이 추상화 수준을 높여 줍니다.
 잘못 선택한 타입 이름은 코드의 의도를 왜곡하고 잘못된 개념을 심어 주게 됩니다.
