@@ -189,4 +189,8 @@
 
 | item |                                                  title                                                  | summary                                                                                                                                                                                                                                                                                             |
 | :--: | :-----------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------ |
+|  58  |     [모던 자바스크립트로 작성하기](https://github.com/Pyotato/effective_typescript/blob/item58/README.md)     | 💡 타입스크립트 개발 환경은 모던 자바스크립트도 실행할 수 있으므로 모던 자바스크립트의 최신 기능들을 적극적으로 사용하길 바랍니다. 코드 품질을 향상시킬 수 있고, 타입스크립트의 타입 추론도 더 나아집니다.<br/>💡 타입스크립트 개발 환경에서는 컴파일러와 언어 서비스를 통해 클래스, 구조 분해, async/await 같은 기능들을 쉽게 배울 수 있습니다.<br/> 💡 TC39의 깃헙 저장소와 타입스크립트의 릴리스 노트를 통해 최신 기능을 확인할 수 있습니다.|
+|  59  |     [](https://github.com/Pyotato/effective_typescript/blob/item59/README.md)     | 💡 <br/> 💡<br/> 💡|
+|  60  |     [](https://github.com/Pyotato/effective_typescript/blob/item60/README.md)     | 💡 <br/> 💡<br/> 💡|
+|  61  |     [](https://github.com/Pyotato/effective_typescript/blob/item61/README.md)     | 💡 <br/> 💡<br/> 💡|
 |  62  |     [마이그레이션의 완성을 위해 noImplicitAny 설정하기](https://github.com/Pyotato/effective_typescript/blob/item62/README.md)     | 💡 `noImplicitAny`설정을 활성화하여 마이그레이션의 마지막 단계를 진행해야 합니다. `noImplicitAny` 설정이 없다면 타입 선언과 관련된 실제 오류가 드러나지 않습니다. <br/> 💡 `noImplicitAny`를 전면 적용하기 전에 로컬에서부터 타입 오류룰 점진적으로 수정해야 합니다. 엄격한 타입 체크를 적용하기 전에 팀원들이 타입스크립트에 익숙해질 수 있도록 시간을 줍시다. |
